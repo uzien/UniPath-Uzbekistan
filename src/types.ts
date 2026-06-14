@@ -23,6 +23,9 @@ export interface University {
   popularMajors: string[];
   tips: string[]; // max 3-5 bullets
   applicationSteps?: string[]; // Custom checklist overrides
+  qsRanking: number;
+  theRanking: number;
+  category: 'ivy_elite' | 'stem_tech' | 'business_finance' | 'europe_low_tuition' | 'asian_top' | 'local_joint';
 }
 
 export interface StudentProfile {

@@ -11,16 +11,17 @@ interface StatusBadgeProps {
   status: EligibilityStatus;
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
+  customLabel?: string;
 }
 
-export default function StatusBadge({ status, size = 'md', showLabel = true }: StatusBadgeProps) {
+export default function StatusBadge({ status, size = 'md', showLabel = true, customLabel }: StatusBadgeProps) {
   const isSm = size === 'sm';
   const isLg = size === 'lg';
 
   let config = {
     bg: 'bg-[#EBFBEE] text-[#2B8A3E] border-[#D3F9D8]',
     dot: 'bg-[#40C057]',
-    label: 'You can apply',
+    label: customLabel || 'Eligible',
     accentColor: '#40C057',
     icon: CheckCircle2,
   };
@@ -29,7 +30,7 @@ export default function StatusBadge({ status, size = 'md', showLabel = true }: S
     config = {
       bg: 'bg-[#FFF9DB] text-[#F08C00] border-[#FFE066]',
       dot: 'bg-[#FAB005]',
-      label: 'Conditional admission',
+      label: customLabel || 'Conditional',
       accentColor: '#FAB005',
       icon: AlertCircle,
     };
@@ -37,7 +38,7 @@ export default function StatusBadge({ status, size = 'md', showLabel = true }: S
     config = {
       bg: 'bg-[#FFF5F5] text-[#C92A2A] border-[#FFC9C9]',
       dot: 'bg-[#FA5252]',
-      label: 'Not eligible',
+      label: customLabel || 'Not eligible',
       accentColor: '#FA5252',
       icon: XCircle,
     };

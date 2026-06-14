@@ -14,14 +14,15 @@ export const UNIVERSITIES: University[] = [
     acceptanceRate: '35%',
     ieltsRequirement: 5.5,
     satRequirement: null,
-    gpaRequirement: 3.0, // 4.0 GPA equivalent (~3.7/5.0)
+    gpaRequirement: 3.0,
     tuition: '$3,200 / year',
     financialAid: 'Government & WIUT Scholarships (Covers 100% for top applicants)',
     uzbekDiplomaStatus: 'Accepted',
-    foundationRequired: true, // WIUT has a compulsory CIFS (Certificate in International Foundation Studies) year
+    foundationRequired: true,
     website: 'https://www.wiut.uz',
     description: 'The first international university established in Tashkent, in partnership with the University of Westminster (UK). Highly respected locally for finance, business, and IT.',
     popularMajors: ['Business Management', 'Commercial Law', 'Finance', 'Business Information Systems'],
+    category: 'local_joint',
     tips: [
       'Apply early in March/April to secure a place on the free state-funded scholarship quota.',
       'Submit the IELTS certificate as soon as possible; a score of 6.0+ waives the Math exam requirement if applicable.',
@@ -33,7 +34,9 @@ export const UNIVERSITIES: University[] = [
       'Upload IELTS Certificate (5.5+ overall with 5.0+ in writing)',
       'Pass the internal WIUT Mathematics Entry Exam (or upload SAT with 550+ Math)',
       'Receive official admission offer and sign contract'
-    ]
+    ],
+    qsRanking: 701,
+    theRanking: 801
   },
   {
     id: 'sapienza-it',
@@ -47,10 +50,11 @@ export const UNIVERSITIES: University[] = [
     tuition: '€1,000 - €2,900 / year',
     financialAid: 'LazioDisco Regional Scholarship (Covers 100% tuition + €6,000/year stipend)',
     uzbekDiplomaStatus: 'Conditional',
-    foundationRequired: true, // Uzbek standard school is 11 years, Italy strictly requires 12 years of education
+    foundationRequired: true,
     website: 'https://www.uniroma1.it',
     description: 'One of the oldest and largest universities in Europe, located in the heart of Rome. Known for providing excellent English-taught bachelors with very low tuition costs and rich regional scholarship programs.',
     popularMajors: ['Global Humanities', 'Applied Computer Science', 'Sustainable Building Engineering', 'Bioinformatics'],
+    category: 'europe_low_tuition',
     tips: [
       'Since Uzbek schools are 11 years, you MUST either: do a 1-year Foundation course, complete 1 year of university study in Uzbekistan, or hold a Lyceum/College 12-year diploma.',
       'Apply during the pre-selection window (typically November - February) to get an early reservation letter.',
@@ -62,7 +66,9 @@ export const UNIVERSITIES: University[] = [
       'Pay the €30 application fee and submit pre-selection form',
       'Complete the mandatory CISIA online test (ENGLISH TOLC-E or TOLC-I) if requested',
       'After acceptance, complete the CIMEA or Universitaly pre-enrollment for visa'
-    ]
+    ],
+    qsRanking: 132,
+    theRanking: 110
   },
   {
     id: 'tum-de',
@@ -76,10 +82,11 @@ export const UNIVERSITIES: University[] = [
     tuition: 'Free (Only €150/semester administrative contribution)',
     financialAid: 'DAAD Scholarships & Working Student Programs (German law allows students to work 140 full days/year)',
     uzbekDiplomaStatus: 'Conditional',
-    foundationRequired: true, // Uzbek 11-year high school is not equivalent to the German Abitur (requires Studienkolleg)
+    foundationRequired: true,
     website: 'https://www.tum.de',
     description: 'Top-ranked technical university in Europe, famous for engineering, computer science, and entrepreneurship. Offers world-class education for virtually zero tuition fees.',
     popularMajors: ['Management and Technology', 'Aerospace Engineering', 'Mathematics', 'Informatics'],
+    category: 'europe_low_tuition',
     tips: [
       'Normal Uzbek high school graduates must attend a 1-year preparatory Studienkolleg in Germany before beginning college, or do 1-2 years of university classes in Uzbekistan.',
       'German language is not required for purely English-taught programs, but knowing basic German (A2/B1) is highly recommended for visas and student jobs.',
@@ -91,7 +98,9 @@ export const UNIVERSITIES: University[] = [
       'Provide IELTS academic 6.5+ (or TOEFL equivalent)',
       'Submit VPD (Vorprüfungsdokumentation) document issued by uni-assist',
       'Participate in the online interview or aptitude assessment if chosen by department'
-    ]
+    ],
+    qsRanking: 28,
+    theRanking: 26
   },
   {
     id: 'harvard-us',
@@ -100,7 +109,7 @@ export const UNIVERSITIES: University[] = [
     city: 'Cambridge, MA',
     acceptanceRate: '3.4%',
     ieltsRequirement: 7.5,
-    satRequirement: 1520, // High expectation, SAT test-optional but effectively critical for international
+    satRequirement: 1520,
     gpaRequirement: 3.9,
     tuition: '$57,200 / year',
     financialAid: '100% Need-Blind (Harvard covers full cost if family income is under $85,000/year)',
@@ -109,6 +118,7 @@ export const UNIVERSITIES: University[] = [
     website: 'https://www.harvard.edu',
     description: 'World-famous Ivy League institution. It is fully need-blind, meaning if an Uzbek student is accepted, Harvard pays for everything (tuition, housing, food, and flights) if family cannot afford it.',
     popularMajors: ['Computer Science', 'Economics', 'Government & International Relations', 'Molecular Biology'],
+    category: 'ivy_elite',
     tips: [
       'Focus intensely on extracurriculars or building real projects. Perfect grades + SAT scores are only the baseline.',
       'Apply Early Action by November 1st to double your chances of acceptance compared to Regular Decision.',
@@ -121,7 +131,9 @@ export const UNIVERSITIES: University[] = [
       'Submit IELTS Academic (7.5+) or TOEFL (100+) & robust SAT/ACT score (Aim for 1500+)',
       'Provide Two Counselor/Teacher Recommendation Letters',
       'Complete the online interview with local or regional alumni if contacted'
-    ]
+    ],
+    qsRanking: 4,
+    theRanking: 2
   },
   {
     id: 'bocconi-it',
@@ -135,10 +147,11 @@ export const UNIVERSITIES: University[] = [
     tuition: '€14,700 / year',
     financialAid: 'Bocconi Merit Award (100% or 50% tuition waiver) & ISU Fee Relief based on family income',
     uzbekDiplomaStatus: 'Accepted',
-    foundationRequired: false, // Accepted if applicant holds Lyceum/College or has SAT/ACT to bypass
+    foundationRequired: false,
     website: 'https://www.unibocconi.eu',
     description: 'One of the best business, economics, and finance schools in Europe. Highly respected globally. Uzbek lyceum or college graduates with 12 years of study are directly welcome.',
     popularMajors: ['International Economics and Management', 'Fintech', 'Mathematical & Computing Sciences for AI', 'Economics & Social Sciences'],
+    category: 'business_finance',
     tips: [
       'Submit the SAT score instead of the internal Bocconi online test as SAT results are often evaluated more favorably.',
       'Prepare a solid letter of motivation expressing your interest in quantitative economics or modern business.',
@@ -150,7 +163,9 @@ export const UNIVERSITIES: University[] = [
       'Upload IELTS 6.0+ (overall with no band under 5.5)',
       'Upload SAT score (high sub-scores in Math are favored) or register for Bocconi admissions test',
       'Submit your CV and Single-page Cover Letter'
-    ]
+    ],
+    qsRanking: 312,
+    theRanking: 251
   },
   {
     id: 'ucl-uk',
@@ -164,10 +179,11 @@ export const UNIVERSITIES: University[] = [
     tuition: '£26,000 - £35,000 / year',
     financialAid: 'Very competitive partial scholarships (UCL Global Undergraduate Scholarship)',
     uzbekDiplomaStatus: 'Conditional',
-    foundationRequired: true, // UK strictly requires A-Levels, IB, or an approved Foundation year
+    foundationRequired: true,
     website: 'https://www.ucl.ac.uk',
     description: 'A top-10 global university based in central London. Offers premier learning hubs but has extremely competitive entry standards and UK visa constraints.',
     popularMajors: ['Architecture', 'Computer Science', 'Economics', 'Biomedical Sciences'],
+    category: 'ivy_elite',
     tips: [
       'The Uzbek 11-year diploma is NOT verified for direct entry. You MUST take the UCL Undergraduate Preparatory Certificate (UPC) foundation year.',
       'UCL is standardly part of the UCAS system; you can choose up to 5 courses across the entire UK.',
@@ -179,7 +195,9 @@ export const UNIVERSITIES: University[] = [
       'Include one reference letter from a teacher with predicted grades',
       'Provide IELTS Academic indicator (typically 7.0+ overall with 6.5+ in each section)',
       'Apply to UCL UPC Foundation program directly if you do not have A-levels/IB'
-    ]
+    ],
+    qsRanking: 9,
+    theRanking: 22
   },
   {
     id: 'yonsei-kr',
@@ -197,6 +215,7 @@ export const UNIVERSITIES: University[] = [
     website: 'https://uic.yonsei.ac.kr',
     description: 'Top-tier "SKY" university in Korea. Underwood International College (UIC) is an all-English liberal arts college of Yonsei, loved by Central Asian high-achievers.',
     popularMajors: ['Comparative Literature', 'Economics', 'Life Science and Biotechnology', 'Information & Interaction Design'],
+    category: 'asian_top',
     tips: [
       'No Korean language proficiency is required to apply or graduate from UIC, but elementary Korean helps integration.',
       'Provide glowing letters of recommendation — the admissions team reviews candidates holistically.',
@@ -208,7 +227,9 @@ export const UNIVERSITIES: University[] = [
       'Submit official IELTS (6.5+) test results directly to school code',
       'Submit two letters of recommendation and complete the online application essay',
       'Attend the 10-minute admissions telephone/Zoom interview'
-    ]
+    ],
+    qsRanking: 56,
+    theRanking: 76
   },
   {
     id: 'constructor-de',
@@ -219,16 +240,17 @@ export const UNIVERSITIES: University[] = [
     ieltsRequirement: 6.0,
     satRequirement: null,
     gpaRequirement: 3.0,
-    tuition: '€20,000 / year (Reduced to ~€12,000 via automated merit grants)',
+    tuition: '€20,000 / year (Reduced via grants)',
     financialAid: 'Automated Merit-Based tuition reductions + financial aid packages based on parent income',
-    uzbekDiplomaStatus: 'Accepted', // Constructor is a private university and can accept Uzbek high school diplomas directly 
+    uzbekDiplomaStatus: 'Accepted',
     foundationRequired: false,
     website: 'https://constructor.university',
     description: 'A private English-medium university located in Germany. Very popular among Uzbek lyceum students as they can enter directly (no Studienkolleg needed) and find solid English degrees.',
     popularMajors: ['Computer Science', 'Robotics and Intelligent Systems', 'Global Economics and Management', 'Biochemistry'],
+    category: 'europe_low_tuition',
     tips: [
       'You bypass the complex Studienkolleg structure entirely since it is a private university using American-style holistic admission.',
-      'Nearly every admitted student gets a automatic tuition reduction of €5,000 to €10,000 based on school grades.',
+      'Nearly every admitted student gets an automatic tuition reduction of €5,000 to €10,000 based on school grades.',
       'Take advantage of their winter intake if you missed the primary summer deadlines.'
     ],
     applicationSteps: [
@@ -237,7 +259,9 @@ export const UNIVERSITIES: University[] = [
       'Provide IELTS (6.0+) score or petition for English medium of instruction waiver (if lyceum was English-taught)',
       'Submit one recommendation letter',
       'File the financial aid calculator form on their portal for supplementary grants'
-    ]
+    ],
+    qsRanking: 501,
+    theRanking: 401
   },
   {
     id: 'usf-us',
@@ -246,15 +270,16 @@ export const UNIVERSITIES: University[] = [
     city: 'Tampa, FL',
     acceptanceRate: '43%',
     ieltsRequirement: 6.5,
-    satRequirement: 1240, // Required for Florida public universities
+    satRequirement: 1240,
     gpaRequirement: 3.0,
-    tuition: '$17,300 / year (Out of State)',
+    tuition: '$17,300 / year',
     financialAid: 'USF Green & Gold President Scholarship (Up to $12,000/year, making tuition only $5,000/year)',
     uzbekDiplomaStatus: 'Accepted',
     foundationRequired: false,
     website: 'https://www.usf.edu',
     description: 'A large, modern public research university in Florida. It offers exceptional cost-performance value for Uzbek students who score 1300+ on the SAT due to the Green & Gold awards.',
     popularMajors: ['Mechanical Engineering', 'Finance', 'Computer Science', 'Biomedical Sciences'],
+    category: 'stem_tech',
     tips: [
       'Florida public universities strictly require an SAT or ACT score; you cannot enter USF without one even if you have an 8.0 IELTS.',
       'Check the scholarship tiers: GPA 3.9+ & SAT 1340+ yields $12,000/year automatically. This makes USF cheaper than WIUT!',
@@ -266,7 +291,9 @@ export const UNIVERSITIES: University[] = [
       'Submit official SAT or ACT score report (Target SAT: 1250+)',
       'Provide IELTS 6.5+ report',
       'Pay the $30 application fee'
-    ]
+    ],
+    qsRanking: 275,
+    theRanking: 251
   },
   {
     id: 'kaist-kr',
@@ -277,13 +304,14 @@ export const UNIVERSITIES: University[] = [
     ieltsRequirement: 6.5,
     satRequirement: null,
     gpaRequirement: 3.6,
-    tuition: 'Free (Fully covered for students maintaining a GPA above 2.7/4.3)',
+    tuition: 'Free (with maintained GPA)',
     financialAid: 'Global KAIST Scholarship (100% Tuition covered + $300 monthly cash stipend + medical insurance)',
     uzbekDiplomaStatus: 'Accepted',
     foundationRequired: false,
     website: 'https://www.kaist.ac.kr',
     description: 'South Korea’s top science and technology institute. Its international undergraduate cohort gets complete cost-coverage, which is highly sought-after by graduates of Tashkent President/AL-Khorazmiy schools.',
     popularMajors: ['Computer Science', 'Electrical Engineering', 'Mechanical Engineering', 'Bio & Brain Engineering'],
+    category: 'stem_tech',
     tips: [
       'Prepare very strong recommendation letters from your STEM teachers (Math, Physics, or CS).',
       'The IELTS is mandatory, but having academic olympiad awards or coding achievements is what truly makes you a winner.',
@@ -296,6 +324,584 @@ export const UNIVERSITIES: University[] = [
       'Arrange for teacher recommendation letters to be sent through secure emails',
       'Upload IELTS (6.5+) or TOEFL iBT (83+) English scores',
       'Pay $80 application fee and track selection process'
-    ]
+    ],
+    qsRanking: 53,
+    theRanking: 83
+  },
+  {
+    id: 'mit-us',
+    name: 'Massachusetts Institute of Technology (MIT)',
+    country: 'USA',
+    city: 'Cambridge, MA',
+    acceptanceRate: '4.8%',
+    ieltsRequirement: 7.5,
+    satRequirement: 1540,
+    gpaRequirement: 3.9,
+    tuition: '$59,750 / year',
+    financialAid: '100% Need-Blind for local + international (families earning below $75,000/year pay absolutely $0)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.mit.edu',
+    description: 'The world\'s absolute finest institute for physical science, space exploration, computing, and complex engineering. Admissions are famously selective and intensely quantitative.',
+    popularMajors: ['Computer Science and Engineering', 'Physics', 'Aerospace Engineering', 'Mathematics'],
+    category: 'stem_tech',
+    tips: [
+      'Unlike other US universities, MIT strictly requires SAT results; they cannot be waived under any situation.',
+      'Demonstrate deep passion by completing extracurricular programming, robotics hacks, or national Olympiads.',
+      'Submit the MIT Maker Portfolio if you have constructed practical scientific rigs or written core research.'
+    ],
+    applicationSteps: [
+      'Submit applications exclusively via MIT MyMIT Portal (not Common App)',
+      'Draft 5 quantitative-focused short essays answering prompt questions',
+      'Arrange for direct submission of official SAT Math and English scores',
+      'Provide IELTS 7.5+ or TOEFL iBT 100+ certificate',
+      'Upload transcript letters + 2 evaluations from school counselors'
+    ],
+    qsRanking: 1,
+    theRanking: 3
+  },
+  {
+    id: 'oxford-uk',
+    name: 'University of Oxford',
+    country: 'UK',
+    city: 'Oxford',
+    acceptanceRate: '15%',
+    ieltsRequirement: 7.5,
+    satRequirement: 1470,
+    gpaRequirement: 3.8,
+    tuition: '£38,500 - £48,600 / year',
+    financialAid: 'Clarendon Fund & Rhodes Scholarship (Highly competitive, mostly postgraduate, few undergraduate)',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.ox.ac.uk',
+    description: 'One of the most prestigious collegiate research universities in the world, with a majestic tutorial teaching system. Requires superb academic writing and technical entrance assessments.',
+    popularMajors: ['Philosophy, Politics and Economics (PPE)', 'Mathematics', 'Computer Science', 'Medicine'],
+    category: 'ivy_elite',
+    tips: [
+      'The standard 11-year school diploma is not sufficient for direct entry; you must present A-Levels, AP exams, or an IB diploma.',
+      'Make sure you register for custom subject admission tests (like the MAT, PAT, or TSA) by early October.',
+      'The Oxford collegiate tutorial interview is highly intense and grades physical problem-solving skills Live.'
+    ],
+    applicationSteps: [
+      'Complete UCAS application indicating your selected collegiate choice by October 15 deadline',
+      'Register and sit for the mandatory subject admissions tests',
+      'Upload teacher academic recommendation and predictions matching A*A*A standards',
+      'Submit academic written samples if demanded by your college department',
+      'Attend the rigorous online academic technical interview panels'
+    ],
+    qsRanking: 3,
+    theRanking: 1
+  },
+  {
+    id: 'cambridge-uk',
+    name: 'University of Cambridge',
+    country: 'UK',
+    city: 'Cambridge',
+    acceptanceRate: '18%',
+    ieltsRequirement: 7.5,
+    satRequirement: 1480,
+    gpaRequirement: 3.8,
+    tuition: '£35,500 - £47,000 / year',
+    financialAid: 'Cambridge Trust Scholarships (Highly competitive partial/full support based on merit)',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.cam.ac.uk',
+    description: 'Elite historical university with unmatched mathematical and scientific lineage. Offers unparalleled research opportunities in classic college setups across central Cambridge.',
+    popularMajors: ['Natural Sciences', 'Engineering', 'Computer Science', 'Economics'],
+    category: 'ivy_elite',
+    tips: [
+      'Standard Uzbek diplomas cannot bypass the high-grade UK A-Level equivalent standard. High-achieving lyceum grads must have APs or IB.',
+      'Excel on the STEP mathematics exam if you are going for Computer Science or Mathematics.',
+      'Write about your absolute deep reading in your UCAS personal statement—superficial activities are dismissed.'
+    ],
+    applicationSteps: [
+      'Prepare UCAS entry detailing educational milestones by October 15',
+      'Fill out the additional My Cambridge Application supplemental form',
+      'Submit written schoolwork sample or sit for custom STEP/TMUA pre-interview tests',
+      'Provide IELTS Academic 7.5+ (minimum 7.0 in all areas)',
+      'Complete the interview process focus-testing your academic depth'
+    ],
+    qsRanking: 2,
+    theRanking: 5
+  },
+  {
+    id: 'stanford-us',
+    name: 'Stanford University',
+    country: 'USA',
+    city: 'Stanford, CA',
+    acceptanceRate: '3.9%',
+    ieltsRequirement: 7.5,
+    satRequirement: 1500,
+    gpaRequirement: 3.9,
+    tuition: '$58,400 / year',
+    financialAid: 'Need-blind admissions support for families earning below $150,000/year (fully covers tuition)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.stanford.edu',
+    description: 'The intellectual heart of Silicon Valley, famous for high-impact innovation, technology venture capital, and multi-disciplinary academic excellence.',
+    popularMajors: ['Computer Science', 'Energy Resources Engineering', 'Symbolic Systems', 'Human Biology'],
+    category: 'ivy_elite',
+    tips: [
+      'Stanford loves intellectual vitality. Show that you are self-directed and have conducted outstanding individual work.',
+      'Spend immense time on the Stanford short prompts (especially the "Letter to Roommate" prompt).',
+      'The IELTS is accepted, but TOEFL scores are standardly preferred. Aim for high SAT Math levels.'
+    ],
+    applicationSteps: [
+      'Fill up the Common App portal and select Stanford',
+      'Draft the CommonApp main essay and 8 tailored Stanford supplemental prompts',
+      'Upload school report plus transcript records outlining exact grades 9 to 12',
+      'Supply SAT or ACT scores representing high performance',
+      'Secure teacher and counselor assessments representing outstanding traits'
+    ],
+    qsRanking: 5,
+    theRanking: 3
+  },
+  {
+    id: 'lse-uk',
+    name: 'London School of Economics (LSE)',
+    country: 'UK',
+    city: 'London',
+    acceptanceRate: '9%',
+    ieltsRequirement: 7.0,
+    satRequirement: null,
+    gpaRequirement: 3.7,
+    tuition: '£25,600 - £31,200 / year',
+    financialAid: 'LSE Undergraduate Support Scheme (Partial waivers based strictly on family income)',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.lse.ac.uk',
+    description: 'A global powerhouse for political science, economics, finance, and international sociology, located right in the financial heart of London.',
+    popularMajors: ['Economics', 'Finance', 'International Relations', 'Social Policy'],
+    category: 'business_finance',
+    tips: [
+      'LSE relies intensely on the Personal Statement. They do not run interviews, so your essay is basically 100% of your subjective score.',
+      'Show that you can construct sharp, evidence-based economic logic in your personal statement.',
+      'IELTS academic level of 7.0 with no band score below 7.0 is strictly expected.'
+    ],
+    applicationSteps: [
+      'Submit UCAS application highlighting your single choice program',
+      'Flesh out the Personal Statement with intense academic focus',
+      'Submit transcripts with predicted high marks in mathematics',
+      'Submit IELTS overall 7.0 score report',
+      'Provide academic guidance recommendation from a designated teacher'
+    ],
+    qsRanking: 45,
+    theRanking: 37
+  },
+  {
+    id: 'toronto-ca',
+    name: 'University of Toronto',
+    country: 'Canada',
+    city: 'Toronto',
+    acceptanceRate: '43%',
+    ieltsRequirement: 6.5,
+    satRequirement: null,
+    gpaRequirement: 3.5,
+    tuition: '$45,000 - $61,000 / year',
+    financialAid: 'Lester B. Pearson International Scholarship (Covers 100% tuition, books, and living stipend)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.utoronto.ca',
+    description: 'Canada\'s top-ranked public research university. Extremely receptive to outstanding Uzbek high school and lyceum graduates, with magnificent campus facilities.',
+    popularMajors: ['Computer Science', 'Commerce (Rotman)', 'Engineering Science', 'Cognitive Science'],
+    category: 'ivy_elite',
+    tips: [
+      'Apply to the Lester B. Pearson scholarship in early Autumn—it requires an official nomination from your Uzbek school.',
+      'U of T evaluates your Grade 11 and first-term Grade 12 grades; ensure they show a clear upward trend.',
+      'Prepare the supplementary video/written profile if you are applying to Rotman Commerce.'
+    ],
+    applicationSteps: [
+      'Submit primary entry via OUAC (Ontario Universities\' Application Centre)',
+      'Log into the Join U of T Portal to upload documents',
+      'Upload IELTS 6.5+ (minimum 6.0 in each band)',
+      'Upload certified translations of grades and graduation certificates',
+      'Complete supplementary application materials for competitive departments'
+    ],
+    qsRanking: 21,
+    theRanking: 21
+  },
+  {
+    id: 'eth-ch',
+    name: 'ETH Zurich',
+    country: 'Switzerland',
+    city: 'Zurich',
+    acceptanceRate: '27%',
+    ieltsRequirement: 7.0,
+    satRequirement: null,
+    gpaRequirement: 3.6,
+    tuition: 'CHF 1,500 / year (Extremely cheap)',
+    financialAid: 'Research Assistant jobs & Swiss Government scholarships',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://ethz.ch',
+    description: 'Europe\'s absolute finest technical university, highly famous for Albert Einstein\'s legacy. Offers virtually free top-class engineering, but requires learning German for undergraduate courses.',
+    popularMajors: ['Computer Science', 'Mechanical Engineering', 'Physics', 'Architecture'],
+    category: 'europe_low_tuition',
+    tips: [
+      'All Bachelor-level programs at ETH Zürich are taught officially in German. You must possess a certified German C1 level.',
+      'Uzbek 11-year school diplomas are not recognized; you must pass the comprehensive ETH Reduced Entrance Examination.',
+      'Tuition is amazingly cheap (less than $1,700/year), but Zurich living costs are extremely expensive.'
+    ],
+    applicationSteps: [
+      'Submit an online admission form via the ETH portal',
+      'Upload certified school diplomas with German/English translations',
+      'Submit recognized German language certificate (e.g. Goethe C1/C2)',
+      'Register for and pass the ETH Reduced Entrance Exam in Zurich',
+      'Complete the Swiss student visa and block financial security funds'
+    ],
+    qsRanking: 7,
+    theRanking: 11
+  },
+  {
+    id: 'sorbonne-fr',
+    name: 'Sorbonne University',
+    country: 'France',
+    city: 'Paris',
+    acceptanceRate: '15%',
+    ieltsRequirement: 6.5,
+    satRequirement: null,
+    gpaRequirement: 3.0,
+    tuition: '€2,770 - €3,770 / year',
+    financialAid: 'Eiffel Excellence Scholarships & French CROUS housing assistance based on family assets',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.sorbonne-universite.fr',
+    description: 'Historical royal university in Paris, legendary for literature, culture, and deep science research. Offers amazing courses at government-controlled tuition rates.',
+    popularMajors: ['Mathematics', 'Humanities and Philosophy', 'Physics', 'History'],
+    category: 'europe_low_tuition',
+    tips: [
+      'Most undergraduate courses require French language proficiency (DELF/DALF B2 or C1 level).',
+      'You can apply directly via the French Government "Etudes en France" portal to bypass custom university steps.',
+      'Combine your application with a CROUS accommodation request early to secure student housing.'
+    ],
+    applicationSteps: [
+      'Register on the Etudes en France (DAP) platform',
+      'Upload academic records, CV, and French motivational letter',
+      'Upload certified French proficiency results (e.g. TCF or DELF B2)',
+      'Attend the orientation interview at the French Campus in Tashkent',
+      'Once pre-accepted, initiate standard French student visa steps'
+    ],
+    qsRanking: 59,
+    theRanking: 75
+  },
+  {
+    id: 'pisa-it',
+    name: 'University of Pisa',
+    country: 'Italy',
+    city: 'Pisa',
+    acceptanceRate: '45%',
+    ieltsRequirement: 5.5,
+    satRequirement: null,
+    gpaRequirement: 2.8,
+    tuition: '€356 - €2,400 / year (based on family wealth)',
+    financialAid: 'DSU regional scholarships (Free tuition + free meals inside campus + up to €7,000 yearly stipend)',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.unipi.it',
+    description: 'Historic Italian university of high repute. Offers excellent English-taught programs in humanities and computer science with very easily attainable regional DSU scholarship funding.',
+    popularMajors: ['Management for Business and Technologies', 'Computer Science', 'Humanities', 'Engineering'],
+    category: 'europe_low_tuition',
+    tips: [
+      'DSU scholarship selection is not based on grades, but strictly on your family economic income documents.',
+      'Uzbek 11-year school graduates must show 1-year of university study or enroll in the Pisa Foundation course.',
+      'Take the online English TOLC-E math exam; high performance ensures direct administrative approval.'
+    ],
+    applicationSteps: [
+      'Submit preliminary application on pre-evaluation portal',
+      'Sit for the TOLC-E or TOLC-I international entrance evaluation',
+      'Upload IELTS Academic certificate (5.5 or higher)',
+      'Submit official pre-enrollment request on Universitaly portal',
+      'File the regional DSU scholarship request with Uzbek family assets documents'
+    ],
+    qsRanking: 349,
+    theRanking: 401
+  },
+  {
+    id: 'tpu-uz',
+    name: 'Turin Polytechnic University in Tashkent (TPUT)',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    acceptanceRate: '60%',
+    ieltsRequirement: 5.0,
+    satRequirement: null,
+    gpaRequirement: 2.8,
+    tuition: '28,500,000 UZS / year',
+    financialAid: 'State-Funded Grants and corporate sponsorship for elite mathematical scores',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: true,
+    website: 'https://polito.uz',
+    description: 'Elite joint polytechnic institute in Uzbekistan in partnership directly with Politecnico di Torino (Italy). Exceptional platform for mechanical engineering and architecture.',
+    popularMajors: ['Mechanical Engineering', 'Software Engineering', 'Civil Engineering and Architecture', 'Industrial Management'],
+    category: 'local_joint',
+    tips: [
+      'Getting a solid score on the internal TIL entry test (made of math and physics) yields guaranteed state grants.',
+      'An IELTS certificate of 5.5+ lets you completely bypass the English section of the TIL entry exam.',
+      'Credits are fully compatible with Turin, Italy, allowing smooth third-year transfer options.'
+    ],
+    applicationSteps: [
+      'Register on the official admission platform (admission.polito.uz)',
+      'Upload school, lyceum, or college graduation certificates',
+      'Submit IELTS 5.0+ or take the internal TIL test english part',
+      'Sit for the computer-based TIL exam (Mathematics and Physics evaluation)',
+      'Review results, select contract style or accept national grant'
+    ],
+    qsRanking: 981,
+    theRanking: 1001
+  },
+  {
+    id: 'webster-uz',
+    name: 'Webster University in Tashkent',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    acceptanceRate: '75%',
+    ieltsRequirement: 5.5,
+    satRequirement: null,
+    gpaRequirement: 2.5,
+    tuition: '$4,200 / year',
+    financialAid: 'Academic scholarship waivers (Up to 20% based on exemplary grades)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://webster.uz',
+    description: 'Official academic campus of Webster University (St. Louis, USA). Offers direct American degrees right inside Tashkent, following standard US credits and scheduling options.',
+    popularMajors: ['Business Administration', 'Media Communications', 'Management Information Systems', 'English (TEFL)'],
+    category: 'local_joint',
+    tips: [
+      'No foundation year is needed because they follow US credit structures directly; 11-year school graduates enter instantly.',
+      'Participate in the multi-cultural campus events to experience real US collegiate environment in Uzbekistan.',
+      'Consider the official 1-semester study abroad exchange path to the St. Louis main campus.'
+    ],
+    applicationSteps: [
+      'Fill up the Webster online application form',
+      'Upload 11-year high school diploma or college/lyceum transcript',
+      'Provide IELTS Academic 5.5+ certificate (waives english classes)',
+      'Provide essay explaining your educational ambitions',
+      'Receive acceptance package and complete enrollment fee'
+    ],
+    qsRanking: 801,
+    theRanking: 801
+  },
+  {
+    id: 'tsul-uz',
+    name: 'Tashkent State University of Law (TSUL)',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    acceptanceRate: '20%',
+    ieltsRequirement: 5.5,
+    satRequirement: null,
+    gpaRequirement: 3.2,
+    tuition: '21,000,000 UZS / year',
+    financialAid: 'Uzbek Government Grants (Covers 100% of costs based on State Testing Centre rank)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://tsul.uz',
+    description: 'The highest legal education authority in Uzbekistan. Offers premium bilingual legal programs and newly introduced joint LL.B degrees with global partners.',
+    popularMajors: ['International Law', 'State Governance', 'Civil Law', 'Criminal Justice'],
+    category: 'local_joint',
+    tips: [
+      'Uzbek native/Russian tests are run by the DTM (State Test Centre); prepare deeply for history and mother tongue.',
+      'Their newly launched English group for International Law requires a valid 6.0+ IELTS to join the elite stream.',
+      'TSUL is a supreme gateway for future judicial, government, or premium advisory careers inside Central Asia.'
+    ],
+    applicationSteps: [
+      'Register on the official government agency site (my.uzbmb.uz)',
+      'Select Law (TSUL) as your priority program options',
+      'Upload high school diploma or secondary college completion record',
+      'Sit for the national state entry exam in August (DTM testing)',
+      'Review your national ranking to secure your budget or contract place'
+    ],
+    qsRanking: 1001,
+    theRanking: 1201
+  },
+  {
+    id: 'nus-sg',
+    name: 'National University of Singapore (NUS)',
+    country: 'Singapore',
+    city: 'Singapore',
+    acceptanceRate: '15%',
+    ieltsRequirement: 6.5,
+    satRequirement: 1450,
+    gpaRequirement: 3.8,
+    tuition: 'S$30,000 - S$40,000 / year',
+    financialAid: 'Singapore MOE Tuition Grant (Offers up to 50% discount in exchange for working 3 years in Singapore)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.nus.edu.sg',
+    description: 'Asia\'s top-ranked prestigious university. Known for unmatched infrastructure, outstanding coding labs, and a global business node, offering high-paying career starting paths.',
+    popularMajors: ['Computer Science', 'Data Science and Analytics', 'Business Administration', 'Electrical Engineering'],
+    category: 'asian_top',
+    tips: [
+      'The Singapore MOE Tuition Grant is highly reliable but binds you to work for 3 years inside Singapore registered firms.',
+      'For science backgrounds, prepare outstanding SAT Subject Tests, high Math grades, or national Olympiad ranks.',
+      'IELTS 6.5 minimum (with high reading and writing thresholds) is strictly enforced.'
+    ],
+    applicationSteps: [
+      'Apply online on the NUS Undergraduate Application website',
+      'Upload Grade 10 to 12 transcribing certified translated files',
+      'Provide SAT score report (Target: 1450+ with 750+ Math score) or ACT equivalent',
+      'Upload IELTS test indicator (6.5+ average)',
+      'Provide supplementary achievements, portfolio, and awards list'
+    ],
+    qsRanking: 8,
+    theRanking: 19
+  },
+  {
+    id: 'kyoto-jp',
+    name: 'Kyoto University',
+    country: 'Japan',
+    city: 'Kyoto',
+    acceptanceRate: '10%',
+    ieltsRequirement: 6.5,
+    satRequirement: 1350,
+    gpaRequirement: 3.5,
+    tuition: '¥535,800 / year (Very affordable)',
+    financialAid: 'MEXT Scholarship (Japanese government pays 100% of study costs, housing, plus monthly cash stipend)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.kyoto-u.ac.jp',
+    description: 'Japan\'s leading research institution, producing numerous Nobel laureates. Offers the English-medium Kyoto iUP program with full cost-coverage paths.',
+    popularMajors: ['Civil Engineering', 'Applied Chemistry', 'Economics', 'Biosciences'],
+    category: 'asian_top',
+    tips: [
+      'Apply to the Kyoto iUP (International Undergraduate Program)—they provide 100% waivers and teach you Japanese from scratch!',
+      'Prepare extremely well for the written science evaluation (Math and Chemistry/Physics/Biology) during admission.',
+      'Secure high recommendation reviews showing intellectual rigor and research aspirations.'
+    ],
+    applicationSteps: [
+      'Create an account on the Kyoto iUP online application system',
+      'Upload certified secondary school records (Uzbek diplomas from schools/lyceums are accepted)',
+      'Submit English proof (IELTS 6.5+ or TOEFL iBT 90+)',
+      'Provide standardized test details (SAT or ACT or national exam scores)',
+      'Pass the preliminary screening and attend the video academic interview'
+    ],
+    qsRanking: 46,
+    theRanking: 55
+  },
+  {
+    id: 'wharton-us',
+    name: 'The Wharton School (University of Pennsylvania)',
+    country: 'USA',
+    city: 'Philadelphia, PA',
+    acceptanceRate: '4.5%',
+    ieltsRequirement: 7.5,
+    satRequirement: 1530,
+    gpaRequirement: 3.9,
+    tuition: '$61,200 / year',
+    financialAid: 'Need-blind admissions packages; full aid covers up to 100% of tuition and board based on family sheets',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.wharton.upenn.edu',
+    description: 'World\'s oldest and most powerful collegiate business school. Famously elite alumni network and leading status in Wall Street, investment baking, and corporate finance.',
+    popularMajors: ['Finance', 'Business Analytics', 'Management', 'Entrepreneurship & Innovation'],
+    category: 'business_finance',
+    tips: [
+      'Wharton loves quantitative mastery. A near-perfect score on SAT Math is expected of Uzbek applicants.',
+      'Show physical entrepreneurial experience. Doing business or initiating real-world societies increases acceptance rate.',
+      'Spend immense thought on the UPenn supplemental essays which are strictly professional.'
+    ],
+    applicationSteps: [
+      'Submit UPenn application through the standard Common App',
+      'Write Penn-specific essays detailing your concrete Wharton major plans',
+      'Upload high school transcripts tracking consistent Grade 9 to 12 excellence',
+      'Supply SAT/ACT score results showcasing quantitative limits',
+      'Provide counselor rating letters plus student peer endorsements'
+    ],
+    qsRanking: 11,
+    theRanking: 10
+  },
+  {
+    id: 'lmu-de',
+    name: 'Ludwig Maximilian University of Munich (LMU)',
+    country: 'Germany',
+    city: 'Munich',
+    acceptanceRate: '15%',
+    ieltsRequirement: 6.5,
+    satRequirement: null,
+    gpaRequirement: 3.4,
+    tuition: 'Free (Only €144/semester administrative fee)',
+    financialAid: 'Germany Scholarship (Deutschlandstipendium) of €300/month for top students',
+    uzbekDiplomaStatus: 'Conditional',
+    foundationRequired: true,
+    website: 'https://www.lmu.de',
+    description: 'One of Germany\'s oldest prestigious universities, located in the heart of Munich. Highly ranked in medicine, social sciences, and humanities with zero tuition costs.',
+    popularMajors: ['Business Administration (English tracks)', 'Economics', 'Informatics', 'Natural Sciences'],
+    category: 'europe_low_tuition',
+    tips: [
+      'German language is highly appreciated, though LMU offers modern bilingual programs in economics.',
+      'If you have an 11-year Uzbek school diploma, you must complete German Studienkolleg before entering.',
+      'Ensure of safe visa Sperrkonto (Blocked account) setup beforehand to prevent timing delays.'
+    ],
+    applicationSteps: [
+      'Apply for evaluation via Uni-Assist portal first',
+      'Register on the LMU admission portal and submit academic logs',
+      'Provide verified IELTS levels or German TestDaF equivalent',
+      'Present VPD document showing the conversion of your grades',
+      'Participate in custom entrance aptitude tests if requested'
+    ],
+    qsRanking: 54,
+    theRanking: 38
+  },
+  {
+    id: 'asu-us',
+    name: 'Arizona State University (ASU)',
+    country: 'USA',
+    city: 'Tempe, AZ',
+    acceptanceRate: '88%',
+    ieltsRequirement: 6.0,
+    satRequirement: null,
+    gpaRequirement: 3.0,
+    tuition: '$31,200 / year',
+    financialAid: 'ASU New American University Scholarship (Up to $15,000/year based on high school GPA)',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://www.asu.edu',
+    description: 'Ranked #1 for innovation in the US, beating Stanford. Highly popular for Uzbek students due to direct acceptances, swift processing, and automatic merit GPA scholarship awards.',
+    popularMajors: ['Computer Science', 'Business Data Analytics', 'Electrical Engineering', 'Marketing'],
+    category: 'stem_tech',
+    tips: [
+      'No SAT/ACT is required for admission or scholarship; high GPA and 6.0+ IELTS triggers cash grants automatically.',
+      'ASU has a rolling admissions scheme; receive decision results of enrollment within 2-3 weeks of submission.',
+      'The automated merit award reduces tuition by almost 50%, making it highly accessible.'
+    ],
+    applicationSteps: [
+      'Submit direct application on the ASU portal',
+      'Submit native language high school transcripts with certified English translation',
+      'Submit IELTS Academic (6.0+ overall)',
+      'Pay the corresponding $85 international application fee',
+      'Receive conditional eligibility letter and I-20 financial form'
+    ],
+    qsRanking: 179,
+    theRanking: 182
+  },
+  {
+    id: 'nus-business',
+    name: 'NUS Business School',
+    country: 'Singapore',
+    city: 'Singapore',
+    acceptanceRate: '8%',
+    ieltsRequirement: 7.0,
+    satRequirement: 1480,
+    gpaRequirement: 3.8,
+    tuition: 'S$32,000 / year',
+    financialAid: 'Jardine Foundation Scholarships & NUS ASEAN scholarships covering all costs',
+    uzbekDiplomaStatus: 'Accepted',
+    foundationRequired: false,
+    website: 'https://bschool.nus.edu.sg',
+    description: 'Leading business center in Southeast Asia. Offers an intense Bachelor of Business Administration (BBA) with incredible linkages to international companies.',
+    popularMajors: ['Business Analytics', 'Finance', 'Supply Chain Management', 'Marketing'],
+    category: 'business_finance',
+    tips: [
+      'A very high SAT Math score (780+) is practically mandatory to pass their quantitative business assessment.',
+      'Demonstrate leader-actions on your CV, such as starting projects, holding school positions, or voluntary runs.',
+      'The course involves intense case competitions; prepare to detail your public presentation experience.'
+    ],
+    applicationSteps: [
+      'Register details on NUS general admissions channel',
+      'Select Business Administration (BBA/BBA Analytics) as priority',
+      'Present official high school transcript plus SAT/ACT score sheets',
+      'Provide IELTS Academic certificate (7.0 or higher)',
+      'Participate in the video admission panel if selected'
+    ],
+    qsRanking: 11,
+    theRanking: 15
   }
 ];
