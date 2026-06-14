@@ -1,0 +1,6 @@
+{
+  "name": "UniPath Uzbekistan",
+  "description": "A clean, iOS-style premium educational decision-making tool for Uzbek students to find and apply to global universities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
