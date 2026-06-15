@@ -210,6 +210,70 @@ export function evaluateEligibility(profile: StudentProfile, university: Univers
 }
 
 /**
+ * Resolves synonyms, nicknames, abbreviations and transliterations (e.g. Uz <=> En) robustly.
+ */
+export function expandSearchQuery(query: string): string[] {
+  const norm = query.toLowerCase().trim().replace(/['`’]/g, '');
+  if (!norm) return [];
+  const terms = [norm];
+
+  // Map of common names, nicknames, abbreviations and transliterations
+  const synonyms: Record<string, string[]> = {
+    'uchicago': ['university of chicago', 'chicago university', 'chicago'],
+    'chicago': ['university of chicago', 'uchicago'],
+    'harvard': ['garvard', 'harvard university', 'garvard universiteti'],
+    'garvard': ['harvard', 'harvard university', 'garvard universiteti'],
+    'oxford': ['oksford', 'university of oxford', 'oksford universiteti'],
+    'oksford': ['oxford', 'university of oxford', 'oksford universiteti'],
+    'cambridge': ['kembrij', 'university of cambridge', 'kembrij universiteti'],
+    'kembrij': ['cambridge', 'university of cambridge', 'kembrij universiteti'],
+    'stanford': ['stenford', 'stanford university', 'stenford universiteti'],
+    'stenford': ['stanford', 'stanford university', 'stenford universiteti'],
+    'mit': ['massachusetts institute of technology', 'massachusets texnologiya instituti'],
+    'ucla': ['university of california, los angeles', 'ucla'],
+    'ucb': ['university of california, berkeley', 'berkeley', 'uc berkeley'],
+    'berkeley': ['ucb', 'uc berkeley'],
+    'lse': ['london school of economics', 'londor iqtisodiyot maktabi'],
+    'upenn': ['university of pennsylvania', 'penn', 'pennsylvania university'],
+    'penn': ['university of pennsylvania', 'upenn'],
+    'caltech': ['california institute of technology', 'kaliforniya texnologiya instituti'],
+    'wiut': ['westminster international university in tashkent', 'vestminster', 'westminster', 'uwiut'],
+    'vestminster': ['westminster', 'wiut', 'westminster international university in tashkent'],
+    'tpu': ['turin polytechnic university in tashkent', 'tput', 'polito', 'turin', 'turin politexnika'],
+    'tput': ['turin polytechnic university in tashkent', 'tpu', 'polito', 'turin'],
+    'turin': ['tpu', 'tput', 'polito', 'turin polytechnic university in tashkent'],
+    'tsul': ['tashkent state university of law', 'yuridik', 'tsul', 'toshkent davlat yuridik universiteti'],
+    'yuridik': ['tsul', 'tashkent state university of law'],
+    'yale': ['yel', 'yale university', 'yel universiteti'],
+    'yel': ['yale', 'yale university'],
+    'columbia': ['kolumbiya', 'columbia university', 'kolumbiya universiteti'],
+    'kolumbiya': ['columbia', 'columbia university'],
+    'nyu': ['new york university', 'nyu', 'nyu university'],
+    'tum': ['technical university of munich', 'myunxen texnika universiteti', 'tum munich'],
+    'lmu': ['ludwig maximilian university of munich', 'ludvig maksimilian', 'lmu munich'],
+    'eth': ['eth zurich', 'ethz', 'swiss federal institute of technology', 'syurix', 'eth syurix'],
+    'yonsei': ['yonsey', 'yonsei university', 'yonsey universiteti'],
+    'kaist': ['koreya ilg\'or texnologiyalar instituti', 'kaist university', 'kays'],
+    'nus': ['national university of singapore', 'singapur milliy universiteti', 'nus singapore'],
+    'asu': ['arizona state university', 'arizona davlat universiteti', 'asu arizona'],
+    'usf': ['university of south florida', 'janubiy florida universiteti', 'usf florida']
+  };
+
+  if (synonyms[norm]) {
+    terms.push(...synonyms[norm]);
+  }
+
+  for (const [key, values] of Object.entries(synonyms)) {
+    if (norm.length >= 3 && (key.includes(norm) || norm.includes(key))) {
+      terms.push(key);
+      terms.push(...values);
+    }
+  }
+
+  return Array.from(new Set(terms));
+}
+
+/**
  * Filter universities based on search term and category shortcuts
  */
 export function filterUniversities(
@@ -224,14 +288,21 @@ export function filterUniversities(
   }
 
   if (searchQuery.trim() !== '') {
-    const q = searchQuery.toLowerCase().trim();
-    filtered = filtered.filter(u => 
-      u.name.toLowerCase().includes(q) ||
-      u.city.toLowerCase().includes(q) ||
-      u.country.toLowerCase().includes(q) ||
-      u.description.toLowerCase().includes(q) ||
-      u.popularMajors.some(m => m.toLowerCase().includes(q))
-    );
+    const qTerms = expandSearchQuery(searchQuery);
+    filtered = filtered.filter(u => {
+      const uName = u.name.toLowerCase();
+      const uCity = u.city.toLowerCase();
+      const uCountry = u.country.toLowerCase();
+      const uDesc = u.description.toLowerCase();
+      
+      return qTerms.some(term => 
+        uName.includes(term) ||
+        uCity.includes(term) ||
+        uCountry.includes(term) ||
+        uDesc.includes(term) ||
+        u.popularMajors.some(m => m.toLowerCase().includes(term))
+      );
+    });
   }
 
   return filtered;

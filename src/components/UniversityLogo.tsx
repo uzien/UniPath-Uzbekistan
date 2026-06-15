@@ -10,6 +10,7 @@ interface UniversityLogoProps {
   website?: string;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  logo?: string;
 }
 
 const DOMAIN_MAP: Record<string, string> = {
@@ -53,7 +54,7 @@ function getDomainFromUrl(url: string | undefined): string {
   }
 }
 
-export default function UniversityLogo({ universityId, website, size = 'md', className = '' }: UniversityLogoProps) {
+export default function UniversityLogo({ universityId, website, size = 'md', className = '', logo }: UniversityLogoProps) {
   const [errorCount, setErrorCount] = useState(0);
   const domain = DOMAIN_MAP[universityId] || getDomainFromUrl(website) || 'wiut.uz';
 
@@ -64,6 +65,19 @@ export default function UniversityLogo({ universityId, website, size = 'md', cla
   };
 
   const selectedSize = sizeClasses[size];
+
+  if (logo) {
+    return (
+      <div className={`flex items-center justify-center bg-white border border-[#E5E5EA] overflow-hidden shadow-xs shrink-0 ${selectedSize} ${className}`}>
+        <img
+          src={logo}
+          alt={`${domain} Logo`}
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-contain rounded-md"
+        />
+      </div>
+    );
+  }
 
   // Primary: Clearbit logo API, Secondary fallback: Google high-res Favicon API, Tertiary fallback: elegant initial card
   let logoUrl = '';

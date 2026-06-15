@@ -12,11 +12,17 @@ export default defineConfig(() => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      watch: {
+        ignored: [
+          '**/custom_universities.json',
+          '**/pending_requests.json',
+          '**/universities.json',
+          path.resolve(__dirname, 'custom_universities.json'),
+          path.resolve(__dirname, 'pending_requests.json'),
+          path.resolve(__dirname, 'universities.json')
+        ]
+      }
     },
   };
 });

@@ -35,7 +35,7 @@ import {
 
 import { StudentProfile, University, EligibilityResult } from './types';
 import { UNIVERSITIES } from './data';
-import { evaluateEligibility, filterUniversities } from './utils';
+import { evaluateEligibility, filterUniversities, expandSearchQuery } from './utils';
 import { Language, UI_TRANSLATIONS, UNIVERSITY_TRANSLATIONS } from './translations';
 import { TOP_100_RANKINGS } from './rankingsData';
 
@@ -605,7 +605,53 @@ export default function App() {
   // Retrieve active university details
   const activeUniversity = useMemo(() => {
     if (!activeUniId) return null;
-    return localizedUniversities.find(u => u.id === activeUniId) || null;
+    
+    // First, look in current localized/DB universities
+    const found = localizedUniversities.find(u => u.id === activeUniId);
+    if (found) return found;
+
+    // Second, if it is a QS Top 100 on-the-fly ID, rebuild dynamically
+    if (activeUniId.startsWith('ranked-')) {
+      const rankNum = parseInt(activeUniId.replace('ranked-', ''), 10);
+      const rankedItem = TOP_100_RANKINGS.find(r => r.rank === rankNum);
+      if (rankedItem) {
+        const cleanCountry = rankedItem.country.trim().toUpperCase();
+        const isUKorGerorIt = cleanCountry === 'UK' || cleanCountry === 'GERMANY' || cleanCountry === 'ITALY';
+        
+        const tempUni: University = {
+          id: `ranked-${rankedItem.rank}`,
+          name: rankedItem.name,
+          country: rankedItem.country,
+          city: rankedItem.city,
+          description: `QS Top 100 World University Rank #${rankedItem.rank}. Located in ${rankedItem.city}, ${rankedItem.country}. Renowned worldwide for advanced educational curriculum, pioneering academic output and career-launching pathways for ambitious international candidates.`,
+          website: rankedItem.website,
+          ieltsRequirement: rankedItem.rank <= 10 ? 7.5 : rankedItem.rank <= 50 ? 7.0 : 6.5,
+          gpaRequirement: rankedItem.rank <= 10 ? 3.8 : rankedItem.rank <= 50 ? 3.5 : 3.0,
+          satRequirement: rankedItem.rank <= 25 ? 1450 : rankedItem.rank <= 60 ? 1350 : null,
+          acceptanceRate: rankedItem.acceptanceRate,
+          tuition: rankedItem.country === 'Germany' || rankedItem.country === 'Switzerland' ? 'Free / Under €3,000' : '$18,000 - $62,000 / yr',
+          financialAid: 'Full Ivy Need-Blind or Regional Merit stipends available',
+          uzbekDiplomaStatus: isUKorGerorIt ? 'Conditional' : 'Accepted',
+          foundationRequired: isUKorGerorIt,
+          category: 'ivy_elite',
+          qsRanking: rankedItem.rank,
+          theRanking: rankedItem.rank,
+          popularMajors: ['Advanced Informatics', 'Quantum Chemistry', 'Aerospace Engineering', 'Global Economics'],
+          tips: [
+            'Prepare a stellar motivation letter explaining your academic goals and leadership potential.',
+            'Maintain a high GPA (above 90% or 4.5/5.0) on your Uzbek Lyceum/College/School transcripts.',
+            'Submit high-quality recommendations from mathematics and subject-related teachers.'
+          ],
+          applicationSteps: [
+            'Obtain score report on IELTS Academic (target overall score 7.0+).',
+            'Request certified English translations and apostilles for your graduation certificate (Shahodatnoma).',
+            'Create account on application platform (CommonApp, UCAS, or direct uni-assist portal) and finalize submission.'
+          ]
+        };
+        return tempUni;
+      }
+    }
+    return null;
   }, [activeUniId, localizedUniversities]);
 
   // Active university eligibility calculation
@@ -989,7 +1035,7 @@ export default function App() {
                   .map((uni) => (
                     <div key={uni.id} className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-neutral-50 ios-transition">
                       <div className="flex items-center gap-3">
-                        <UniversityLogo universityId={uni.id} website={uni.website} size="lg" />
+                        <UniversityLogo universityId={uni.id} website={uni.website} logo={uni.logo} size="lg" />
                         <div className="space-y-0.5">
                           <h4 className="text-sm font-black text-[#1C1C1E] leading-snug">{uni.name}</h4>
                           <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-gray-500 font-semibold tracking-wider uppercase">
@@ -1179,10 +1225,14 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="text-xs font-bold text-gray-500 bg-white border border-[#E5E5EA] px-3 py-2 rounded-xl shadow-xs self-start sm:self-auto flex items-center gap-1.5">
+                    <button
+                      onClick={() => setIsProfileOpen(!isProfileOpen)}
+                      className="text-xs font-bold text-[#3A3A3C] hover:text-[#007AFF] bg-white hover:bg-[#F2F2F7] border border-[#E5E5EA] px-3.5 py-2.5 rounded-xl shadow-xs self-start sm:self-auto flex items-center gap-1.5 cursor-pointer ios-active-scale transition-all"
+                      title="Click to edit school stats"
+                    >
                       <Sparkles className="w-4 h-4 text-[#007AFF] animate-pulse" />
-                      <span>Profile: {profileStateSummary}</span>
-                    </div>
+                      <span>{t.navAcademicProfile || 'Academic Settings'}: {profileStateSummary}</span>
+                    </button>
                   </div>
 
                   {/* Intro Info Alert */}
@@ -1232,10 +1282,12 @@ export default function App() {
                   <div className="space-y-3.5 animate-fade-in text-black">
                     {TOP_100_RANKINGS
                       .filter((item) => {
-                        const matchText = 
-                          item.name.toLowerCase().includes(adminUniSearchQuery.toLowerCase()) ||
-                          item.city.toLowerCase().includes(adminUniSearchQuery.toLowerCase()) ||
-                          item.country.toLowerCase().includes(adminUniSearchQuery.toLowerCase());
+                        const qTerms = expandSearchQuery(adminUniSearchQuery);
+                        const matchText = qTerms.length === 0 ? true : qTerms.some(term =>
+                          item.name.toLowerCase().includes(term) ||
+                          item.city.toLowerCase().includes(term) ||
+                          item.country.toLowerCase().includes(term)
+                        );
                         
                         if (!selectedCategory) return matchText;
                         if (selectedCategory === 'USA') return matchText && item.country === 'USA';
@@ -1246,34 +1298,96 @@ export default function App() {
                         return matchText;
                       })
                       .map((item) => {
+                        // Resolve domain & default values
+                        const cleanCountry = item.country.trim().toUpperCase();
+                        const isUKorGerorIt = cleanCountry === 'UK' || cleanCountry === 'GERMANY' || cleanCountry === 'ITALY';
+                        
                         const tempUni: University = {
                           id: `ranked-${item.rank}`,
                           name: item.name,
                           country: item.country,
                           city: item.city,
-                          description: `QS Top 100 World University Rank #${item.rank}. Globally tracked on Uzbek Admission standard.`,
+                          description: `QS Top 100 World University Rank #${item.rank}. Located in ${item.city}, ${item.country}. Renowned worldwide for advanced educational curriculum, pioneering academic output and career-launching pathways for ambitious international candidates.`,
                           website: item.website,
                           ieltsRequirement: item.rank <= 10 ? 7.5 : item.rank <= 50 ? 7.0 : 6.5,
                           gpaRequirement: item.rank <= 10 ? 3.8 : item.rank <= 50 ? 3.5 : 3.0,
-                          satRequirement: item.rank <= 25 ? 1450 : item.rank <= 60 ? 1350 : 1200,
+                          satRequirement: item.rank <= 25 ? 1450 : item.rank <= 60 ? 1350 : null,
                           acceptanceRate: item.acceptanceRate,
-                          tuition: item.country === 'Germany' || item.country === 'Switzerland' ? 'Free / Under €3,000' : '$18,000 - $68,000 / yr',
-                          financialAid: 'Full Ivy Need-Blind or Regional Merit stipends',
-                          uzbekDiplomaStatus: 'Accepted',
-                          foundationRequired: true,
+                          tuition: item.country === 'Germany' || item.country === 'Switzerland' ? 'Free / Under €3,000' : '$18,000 - $62,000 / yr',
+                          financialAid: 'Full Ivy Need-Blind or Regional Merit stipends available',
+                          uzbekDiplomaStatus: isUKorGerorIt ? 'Conditional' : 'Accepted',
+                          foundationRequired: isUKorGerorIt,
                           category: 'ivy_elite',
                           qsRanking: item.rank,
                           theRanking: item.rank,
                           popularMajors: ['Advanced Informatics', 'Quantum Chemistry', 'Aerospace Engineering', 'Global Economics'],
-                          tips: ['Submit common app'],
-                          applicationSteps: ['Take academic IELTS']
+                          tips: [
+                            'Prepare a stellar motivation letter explaining your academic goals and leadership potential.',
+                            'Maintain a high GPA (above 90% or 4.5/5.0) on your Uzbek Lyceum/College/School transcripts.',
+                            'Submit high-quality recommendations from mathematics and subject-related teachers.'
+                          ],
+                          applicationSteps: [
+                            'Obtain score report on IELTS Academic (target overall score 7.0+).',
+                            'Request certified English translations and apostilles for your graduation certificate (Shahodatnoma).',
+                            'Create account on application platform (CommonApp, UCAS, or direct uni-assist portal) and finalize submission.'
+                          ]
                         };
 
-                        const eligibility = evaluateEligibility(studentProfile, tempUni, language);
+                        // Helper for Uzbek Diploma acceptability
+                        const getUzbekDiplomaStatus = (country: string) => {
+                          const c = country.trim().toUpperCase();
+                          if (c === 'USA' || c === 'CANADA' || c === 'SINGAPORE') {
+                            return {
+                              label: 'Directly Accepted',
+                              badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                              desc: 'Accepts standard secondary school diploma'
+                            };
+                          }
+                          if (c === 'UK' || c === 'AUSTRALIA') {
+                            return {
+                              label: 'Requires Foundation',
+                              badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
+                              desc: 'Requires 1-year university prep pathway'
+                            };
+                          }
+                          if (c === 'GERMANY') {
+                            return {
+                              label: 'Studienkolleg Required',
+                              badgeBg: 'bg-yellow-50 text-yellow-800 border-yellow-200',
+                              desc: 'Requires 1-year Studienkolleg prep course'
+                            };
+                          }
+                          if (c === 'ITALY') {
+                            return {
+                              label: 'Accepted (with 12 years)',
+                              badgeBg: 'bg-blue-50 text-blue-800 border-blue-200',
+                              desc: 'Requires 12-year Lyceum/College diploma'
+                            };
+                          }
+                          if (c === 'SWITZERLAND') {
+                            return {
+                              label: 'Entrance Exam Required',
+                              badgeBg: 'bg-indigo-50 text-indigo-800 border-indigo-200',
+                              desc: 'Requires passing rigorous entrance exams'
+                            };
+                          }
+                          return {
+                            label: 'Conditional Review',
+                            badgeBg: 'bg-gray-100 text-gray-700 border-gray-200',
+                            desc: 'Evaluated individually on file review'
+                          };
+                        };
+
+                        const dipStatus = getUzbekDiplomaStatus(item.country);
 
                         return (
-                          <div key={item.rank} className="p-4 bg-white border border-[#E5E5EA] rounded-[24px] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md ios-transition">
-                            <div className="flex items-center gap-4.5">
+                          <div 
+                            key={item.rank} 
+                            onClick={() => navigateToUniversity(tempUni.id)}
+                            className="p-4 bg-white border border-[#E5E5EA] rounded-[24px] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md hover:border-[#007AFF]/40 transition-all duration-200 cursor-pointer group"
+                          >
+                            <div className="flex items-center gap-4">
+                              {/* Rank position badge */}
                               <div className={`w-11 h-11 rounded-2xl shrink-0 flex items-center justify-center font-black text-sm shadow-xs ${
                                 item.rank === 1 ? 'bg-amber-100 text-amber-800' :
                                 item.rank === 2 ? 'bg-slate-100 text-slate-700' :
@@ -1283,9 +1397,18 @@ export default function App() {
                                 #{item.rank}
                               </div>
 
+                              {/* Official real-world High-Quality University logo! */}
+                              <UniversityLogo 
+                                universityId={tempUni.id} 
+                                website={tempUni.website} 
+                                logo={tempUni.logo}
+                                size="md" 
+                                className="shadow-xs bg-[#F8F9FA] rounded-2xl border" 
+                              />
+
                               <div className="space-y-1">
-                                <h3 className="font-extrabold text-sm sm:text-base text-gray-950 leading-snug flex items-center gap-2 flex-wrap">
-                                  <span>{item.name}</span>
+                                <h3 className="font-extrabold text-sm sm:text-base text-gray-950 leading-snug group-hover:text-[#007AFF] transition-colors">
+                                  {item.name}
                                 </h3>
                                 <div className="flex flex-wrap items-center gap-2 text-[11px] text-gray-500 font-bold uppercase tracking-wider">
                                   <span>{item.city}, {item.country}</span>
@@ -1297,28 +1420,19 @@ export default function App() {
                               </div>
                             </div>
 
-                            <div className="flex items-center gap-3 self-end sm:self-center">
-                              <div className="text-right hidden xs:block">
-                                <span className="block text-[9px] text-[#8E8E93] font-bold uppercase tracking-widest leading-none mb-1"> Uzbek Compatibility</span>
-                                <span className={`text-[11px] font-black uppercase tracking-wider ${
-                                  eligibility.status === 'Eligible' ? 'text-[#34C759]' :
-                                  eligibility.status === 'Conditional' ? 'text-[#FF9500]' :
-                                  'text-[#FF3B30]'
-                                }`}>
-                                  {eligibility.status === 'Eligible' ? 'High Chance' :
-                                   eligibility.status === 'Conditional' ? 'Conditional' :
-                                   'Gap Exists'}
+                            <div className="flex items-center gap-3 self-end md:self-center ml-auto md:ml-0" onClick={(e) => e.stopPropagation()}>
+                              <div className="text-right hidden sm:block">
+                                <span className="block text-[9px] md:text-[10px] text-[#8E8E93] font-extrabold uppercase tracking-widest leading-none mb-1">
+                                  Shahodatnoma
+                                </span>
+                                <span className="text-[11px] text-gray-400 font-bold">
+                                  {dipStatus.desc}
                                 </span>
                               </div>
 
-                              <div className={`px-3 py-1.5 rounded-xl text-xs font-bold leading-none ${
-                                eligibility.status === 'Eligible' ? 'bg-[#EBFBEE] text-[#28A745]' :
-                                eligibility.status === 'Conditional' ? 'bg-amber-50 text-amber-800' :
-                                'bg-rose-50 text-rose-700'
-                              }`}>
-                                {eligibility.status === 'Eligible' ? 'Eligible' :
-                                 eligibility.status === 'Conditional' ? 'Pathway Required' :
-                                 'Needs Improvement'}
+                              {/* Distinctive, clean, high-contrast, professional acceptance badge */}
+                              <div className={`px-3 py-1.5 rounded-xl text-xs font-black border uppercase tracking-wider ${dipStatus.badgeBg}`}>
+                                {dipStatus.label}
                               </div>
                               
                               <a 
@@ -1326,9 +1440,9 @@ export default function App() {
                                 target="_blank"
                                 rel="noreferrer"
                                 className="p-2 border border-[#E5E5EA] hover:bg-neutral-50 rounded-xl ios-transition cursor-pointer"
-                                title="Visit official homepage"
+                                title="Visit official website"
                               >
-                                <ExternalLink className="w-4 h-4 text-gray-500" />
+                                <ExternalLink className="w-4 h-4 text-gray-500 hover:text-[#007AFF]" />
                               </a>
                             </div>
                           </div>
@@ -1566,7 +1680,7 @@ export default function App() {
                  <div className="flex flex-col sm:flex-row sm:items-center gap-5">
                    {activeUniversity && (
                      <UniversityLogo
-                       universityId={activeUniversity.id}
+                       universityId={activeUniversity.id} logo={activeUniversity.logo}
                        website={activeUniversity?.website}
                        size="lg"
                        className="shadow-md flex-shrink-0 animate-fade-in"

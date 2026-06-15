@@ -10,6 +10,7 @@ export interface University {
   name: string;
   country: string;
   city: string;
+  logo?: string;
   acceptanceRate: string;
   ieltsRequirement: number;
   satRequirement: number | null;

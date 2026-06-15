@@ -52,6 +52,7 @@ export default function UniversityCard({ university, studentProfile, onViewDetai
           <UniversityLogo
             universityId={university.id}
             website={university.website}
+            logo={university.logo}
             size="md"
             className="flex-shrink-0 group-hover:scale-105 duration-300 transition-transform shadow-sm"
           />

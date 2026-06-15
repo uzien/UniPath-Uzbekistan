@@ -19,6 +19,7 @@ export default function UniversityEditorModal({ isOpen, onClose, onSave, initial
   const [website, setWebsite] = useState('');
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
+  const [logo, setLogo] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<'ivy_elite' | 'stem_tech' | 'business_finance' | 'europe_low_tuition' | 'asian_top' | 'local_joint'>('ivy_elite');
   const [acceptanceRate, setAcceptanceRate] = useState('35%');
@@ -41,6 +42,7 @@ export default function UniversityEditorModal({ isOpen, onClose, onSave, initial
       setWebsite(initialData.website || '');
       setCountry(initialData.country || '');
       setCity(initialData.city || '');
+      setLogo(initialData.logo || '');
       setDescription(initialData.description || '');
       setCategory(initialData.category || 'ivy_elite');
       setAcceptanceRate(initialData.acceptanceRate || '');
@@ -61,6 +63,7 @@ export default function UniversityEditorModal({ isOpen, onClose, onSave, initial
       setWebsite('');
       setCountry('');
       setCity('');
+      setLogo('');
       setDescription('');
       setCategory('ivy_elite');
       setAcceptanceRate('35%');
@@ -93,6 +96,7 @@ export default function UniversityEditorModal({ isOpen, onClose, onSave, initial
       website,
       country,
       city,
+      logo,
       description,
       category,
       acceptanceRate,
@@ -193,6 +197,75 @@ export default function UniversityEditorModal({ isOpen, onClose, onSave, initial
                   onChange={(e) => setCity(e.target.value)}
                   className="w-full px-4 py-2 bg-[#F2F2F7] text-black border border-[#E5E5EA] focus:border-[#007AFF] rounded-xl text-xs font-semibold outline-hidden focus:bg-white"
                   placeholder="e.g. Cambridge"
+                />
+              </div>
+            </div>
+
+            {/* LOGO SELECTION AND UPLOAD CONTROLS */}
+            <div className="p-4 bg-gray-50 border border-gray-200 rounded-2xl space-y-3">
+              <div className="flex items-start gap-4">
+                {logo ? (
+                  <div className="w-14 h-14 rounded-2xl overflow-hidden bg-white border border-[#E5E5EA] flex items-center justify-center shrink-0 shadow-xs">
+                    <img src={logo} alt="Logo Preview" className="w-full h-full object-contain p-1" />
+                  </div>
+                ) : (
+                  <div className="w-14 h-14 rounded-2xl bg-[#E5E5EA]/40 border-2 border-dashed border-gray-300 flex items-center justify-center shrink-0">
+                    <Landmark className="w-6 h-6 text-gray-400" />
+                  </div>
+                )}
+                <div className="flex-1 space-y-1.5">
+                  <span className="text-[10px] font-bold text-[#8E8E93] uppercase tracking-wider block">Official Brand Logo</span>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onload = (event) => {
+                            if (event.target?.result) {
+                              setLogo(event.target.result as string);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                      className="hidden"
+                      id="logo-upload-input"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => document.getElementById('logo-upload-input')?.click()}
+                      className="px-3.5 py-2 bg-[#007AFF] text-white text-xs font-black rounded-xl hover:bg-[#007AFF]/90 cursor-pointer shadow-xs transition-colors"
+                    >
+                      Browse Image
+                    </button>
+                    {logo && (
+                      <button
+                        type="button"
+                        onClick={() => setLogo('')}
+                        className="px-3 py-2 border border-red-200 bg-white text-red-600 text-xs font-black rounded-xl hover:bg-neutral-100 cursor-pointer shadow-xs transition-colors"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-[9px] text-[#8E8E93] font-bold leading-tight">
+                    Select a high-quality JPEG/PNG from your local storage. It gets saved as a base64 string.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-1.5 border-t border-gray-100 pt-3">
+                <label className="text-[10px] font-bold text-[#8E8E93] uppercase tracking-wider block">Or Paste Direct Logo Image URL</label>
+                <input
+                  type="text"
+                  value={logo.startsWith('data:') ? '' : logo}
+                  onChange={(e) => setLogo(e.target.value)}
+                  disabled={logo.startsWith('data:')}
+                  className="w-full px-4 py-2 bg-white text-black border border-[#E5E5EA] focus:border-[#007AFF] rounded-xl text-xs font-semibold outline-hidden focus:bg-white"
+                  placeholder={logo.startsWith('data:') ? 'Uploaded local image is active' : 'e.g. https://domain.com/logo.png'}
                 />
               </div>
             </div>
